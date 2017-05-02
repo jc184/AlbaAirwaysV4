@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListRouteTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="RouteListForm">
+                <p:panel header="#{bundle.ListRouteTitle}">
+                    <p:dataTable id="datalist" value="#{routeController.items}" var="item"
+                                 selectionMode="single" selection="#{routeController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.routeId}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRouteTitle_routeId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.routeId}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRouteTitle_routeName}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.routeName}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRouteTitle_airportFrom}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.airportFrom}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRouteTitle_airportTo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.airportTo}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRouteTitle_adultFare}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.adultFare}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRouteTitle_childFare}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.childFare}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRouteTitle_infantFare}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.infantFare}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{routeController.prepareCreate}" update=":RouteCreateForm" oncomplete="PF('RouteCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":RouteViewForm" oncomplete="PF('RouteViewDialog').show()" disabled="#{empty routeController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":RouteEditForm" oncomplete="PF('RouteEditDialog').show()" disabled="#{empty routeController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{routeController.destroy}" update=":growl,datalist" disabled="#{empty routeController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="RouteEditDlg" widgetVar="RouteEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditRouteTitle}">
+            <h:form id="RouteEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{routeController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditRouteLabel_routeId}" for="routeId" />
+                        <p:inputText id="routeId" value="#{routeController.selected.routeId}" title="#{bundle.EditRouteTitle_routeId}" required="true" requiredMessage="#{bundle.EditRouteRequiredMessage_routeId}"/>
+                        <p:outputLabel value="#{bundle.EditRouteLabel_routeName}" for="routeName" />
+                        <p:inputText id="routeName" value="#{routeController.selected.routeName}" title="#{bundle.EditRouteTitle_routeName}" required="true" requiredMessage="#{bundle.EditRouteRequiredMessage_routeName}"/>
+                        <p:outputLabel value="#{bundle.EditRouteLabel_airportFrom}" for="airportFrom" />
+                        <p:inputText id="airportFrom" value="#{routeController.selected.airportFrom}" title="#{bundle.EditRouteTitle_airportFrom}" required="true" requiredMessage="#{bundle.EditRouteRequiredMessage_airportFrom}"/>
+                        <p:outputLabel value="#{bundle.EditRouteLabel_airportTo}" for="airportTo" />
+                        <p:inputText id="airportTo" value="#{routeController.selected.airportTo}" title="#{bundle.EditRouteTitle_airportTo}" required="true" requiredMessage="#{bundle.EditRouteRequiredMessage_airportTo}"/>
+                        <p:outputLabel value="#{bundle.EditRouteLabel_adultFare}" for="adultFare" />
+                        <p:inputText id="adultFare" value="#{routeController.selected.adultFare}" title="#{bundle.EditRouteTitle_adultFare}" required="true" requiredMessage="#{bundle.EditRouteRequiredMessage_adultFare}"/>
+                        <p:outputLabel value="#{bundle.EditRouteLabel_childFare}" for="childFare" />
+                        <p:inputText id="childFare" value="#{routeController.selected.childFare}" title="#{bundle.EditRouteTitle_childFare}" required="true" requiredMessage="#{bundle.EditRouteRequiredMessage_childFare}"/>
+                        <p:outputLabel value="#{bundle.EditRouteLabel_infantFare}" for="infantFare" />
+                        <p:inputText id="infantFare" value="#{routeController.selected.infantFare}" title="#{bundle.EditRouteTitle_infantFare}" required="true" requiredMessage="#{bundle.EditRouteRequiredMessage_infantFare}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{routeController.update}" value="#{bundle.Save}" update="display,:RouteListForm:datalist,:growl" oncomplete="handleSubmit(args, 'RouteEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="RouteEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="BookingCreateDlg" widgetVar="BookingCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateBookingTitle}">
+            <h:form id="BookingCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{bookingController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateBookingLabel_bookingId}" for="bookingId" />
+                        <p:inputText id="bookingId" value="#{bookingController.selected.bookingId}" title="#{bundle.CreateBookingTitle_bookingId}" required="true" requiredMessage="#{bundle.CreateBookingRequiredMessage_bookingId}"/>
+                        <p:outputLabel value="#{bundle.CreateBookingLabel_noOfAdults}" for="noOfAdults" />
+                        <p:inputText id="noOfAdults" value="#{bookingController.selected.noOfAdults}" title="#{bundle.CreateBookingTitle_noOfAdults}" required="true" requiredMessage="#{bundle.CreateBookingRequiredMessage_noOfAdults}"/>
+                        <p:outputLabel value="#{bundle.CreateBookingLabel_noOfChildren}" for="noOfChildren" />
+                        <p:inputText id="noOfChildren" value="#{bookingController.selected.noOfChildren}" title="#{bundle.CreateBookingTitle_noOfChildren}" required="true" requiredMessage="#{bundle.CreateBookingRequiredMessage_noOfChildren}"/>
+                        <p:outputLabel value="#{bundle.CreateBookingLabel_noOfInfants}" for="noOfInfants" />
+                        <p:inputText id="noOfInfants" value="#{bookingController.selected.noOfInfants}" title="#{bundle.CreateBookingTitle_noOfInfants}" required="true" requiredMessage="#{bundle.CreateBookingRequiredMessage_noOfInfants}"/>
+                        <p:outputLabel value="#{bundle.CreateBookingLabel_ticketType}" for="ticketType" />
+                        <p:inputText id="ticketType" value="#{bookingController.selected.ticketType}" title="#{bundle.CreateBookingTitle_ticketType}" required="true" requiredMessage="#{bundle.CreateBookingRequiredMessage_ticketType}"/>
+                        <p:outputLabel value="#{bundle.CreateBookingLabel_seatType}" for="seatType" />
+                        <p:inputText id="seatType" value="#{bookingController.selected.seatType}" title="#{bundle.CreateBookingTitle_seatType}" required="true" requiredMessage="#{bundle.CreateBookingRequiredMessage_seatType}"/>
+                        <p:outputLabel value="#{bundle.CreateBookingLabel_customerId}" for="customerId" />
+                        <p:selectOneMenu id="customerId" value="#{bookingController.selected.customerId}" required="true" requiredMessage="#{bundle.EditBookingRequiredMessage_customerId}">
+                            <f:selectItems value="#{customerController.itemsAvailableSelectOne}"
+                                           var="customerIdItem"
+                                           itemValue="#{customerIdItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateBookingLabel_flightId}" for="flightId" />
+                        <p:selectOneMenu id="flightId" value="#{bookingController.selected.flightId}" required="true" requiredMessage="#{bundle.EditBookingRequiredMessage_flightId}">
+                            <f:selectItems value="#{flightController.itemsAvailableSelectOne}"
+                                           var="flightIdItem"
+                                           itemValue="#{flightIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{bookingController.create}" value="#{bundle.Save}" update="display,:BookingListForm:datalist,:growl" oncomplete="handleSubmit(args,'BookingCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="BookingCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

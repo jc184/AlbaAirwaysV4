@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CustomerCreateDlg" widgetVar="CustomerCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCustomerTitle}">
+            <h:form id="CustomerCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{customerController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateCustomerLabel_customerId}" for="customerId" />
+                        <p:inputText id="customerId" value="#{customerController.selected.customerId}" title="#{bundle.CreateCustomerTitle_customerId}" required="true" requiredMessage="#{bundle.CreateCustomerRequiredMessage_customerId}"/>
+                        <p:outputLabel value="#{bundle.CreateCustomerLabel_firstName}" for="firstName" />
+                        <p:inputText id="firstName" value="#{customerController.selected.firstName}" title="#{bundle.CreateCustomerTitle_firstName}" required="true" requiredMessage="#{bundle.CreateCustomerRequiredMessage_firstName}"/>
+                        <p:outputLabel value="#{bundle.CreateCustomerLabel_surname}" for="surname" />
+                        <p:inputText id="surname" value="#{customerController.selected.surname}" title="#{bundle.CreateCustomerTitle_surname}" required="true" requiredMessage="#{bundle.CreateCustomerRequiredMessage_surname}"/>
+                        <p:outputLabel value="#{bundle.CreateCustomerLabel_contactNo}" for="contactNo" />
+                        <p:inputText id="contactNo" value="#{customerController.selected.contactNo}" title="#{bundle.CreateCustomerTitle_contactNo}" required="true" requiredMessage="#{bundle.CreateCustomerRequiredMessage_contactNo}"/>
+                        <p:outputLabel value="#{bundle.CreateCustomerLabel_emailAddress}" for="emailAddress" />
+                        <p:inputText id="emailAddress" value="#{customerController.selected.emailAddress}" title="#{bundle.CreateCustomerTitle_emailAddress}" required="true" requiredMessage="#{bundle.CreateCustomerRequiredMessage_emailAddress}"/>
+                        <p:outputLabel value="#{bundle.CreateCustomerLabel_loginName}" for="loginName" />
+                        <p:inputText id="loginName" value="#{customerController.selected.loginName}" title="#{bundle.CreateCustomerTitle_loginName}" required="true" requiredMessage="#{bundle.CreateCustomerRequiredMessage_loginName}"/>
+                        <p:outputLabel value="#{bundle.CreateCustomerLabel_loginPassword}" for="loginPassword" />
+                        <p:inputText id="loginPassword" value="#{customerController.selected.loginPassword}" title="#{bundle.CreateCustomerTitle_loginPassword}" required="true" requiredMessage="#{bundle.CreateCustomerRequiredMessage_loginPassword}"/>
+                        <p:outputLabel value="#{bundle.CreateCustomerLabel_dateOfBirth}" for="dateOfBirth" />
+                        <p:calendar id="dateOfBirth" pattern="MM/dd/yyyy" value="#{customerController.selected.dateOfBirth}" title="#{bundle.EditCustomerTitle_dateOfBirth}" required="true" requiredMessage="#{bundle.EditCustomerRequiredMessage_dateOfBirth}" showOn="button"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{customerController.create}" value="#{bundle.Save}" update="display,:CustomerListForm:datalist,:growl" oncomplete="handleSubmit(args,'CustomerCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CustomerCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

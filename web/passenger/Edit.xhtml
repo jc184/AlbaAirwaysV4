@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PassengerEditDlg" widgetVar="PassengerEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPassengerTitle}">
+            <h:form id="PassengerEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{passengerController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditPassengerLabel_passengerId}" for="passengerId" />
+                        <p:inputText id="passengerId" value="#{passengerController.selected.passengerId}" title="#{bundle.EditPassengerTitle_passengerId}" required="true" requiredMessage="#{bundle.EditPassengerRequiredMessage_passengerId}"/>
+                        <p:outputLabel value="#{bundle.EditPassengerLabel_passengerName}" for="passengerName" />
+                        <p:inputText id="passengerName" value="#{passengerController.selected.passengerName}" title="#{bundle.EditPassengerTitle_passengerName}" required="true" requiredMessage="#{bundle.EditPassengerRequiredMessage_passengerName}"/>
+                        <p:outputLabel value="#{bundle.EditPassengerLabel_passengerType}" for="passengerType" />
+                        <p:inputText id="passengerType" value="#{passengerController.selected.passengerType}" title="#{bundle.EditPassengerTitle_passengerType}" required="true" requiredMessage="#{bundle.EditPassengerRequiredMessage_passengerType}"/>
+                        <p:outputLabel value="#{bundle.EditPassengerLabel_bookingId}" for="bookingId" />
+                        <p:selectOneMenu id="bookingId" value="#{passengerController.selected.bookingId}" required="true" requiredMessage="#{bundle.EditPassengerRequiredMessage_bookingId}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{bookingController.itemsAvailableSelectOne}"
+                                           var="bookingIdItem"
+                                           itemValue="#{bookingIdItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditPassengerLabel_flightId}" for="flightId" />
+                        <p:selectOneMenu id="flightId" value="#{passengerController.selected.flightId}" required="true" requiredMessage="#{bundle.EditPassengerRequiredMessage_flightId}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{flightController.itemsAvailableSelectOne}"
+                                           var="flightIdItem"
+                                           itemValue="#{flightIdItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditPassengerLabel_seatNo}" for="seatNo" />
+                        <p:selectOneMenu id="seatNo" value="#{passengerController.selected.seatNo}" required="true" requiredMessage="#{bundle.EditPassengerRequiredMessage_seatNo}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{seatController.itemsAvailableSelectOne}"
+                                           var="seatNoItem"
+                                           itemValue="#{seatNoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{passengerController.update}" value="#{bundle.Save}" update="display,:PassengerListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PassengerEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PassengerEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

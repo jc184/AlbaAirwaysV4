@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="RouteCreateDlg" widgetVar="RouteCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateRouteTitle}">
+            <h:form id="RouteCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{routeController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateRouteLabel_routeId}" for="routeId" />
+                        <p:inputText id="routeId" value="#{routeController.selected.routeId}" title="#{bundle.CreateRouteTitle_routeId}" required="true" requiredMessage="#{bundle.CreateRouteRequiredMessage_routeId}"/>
+                        <p:outputLabel value="#{bundle.CreateRouteLabel_routeName}" for="routeName" />
+                        <p:inputText id="routeName" value="#{routeController.selected.routeName}" title="#{bundle.CreateRouteTitle_routeName}" required="true" requiredMessage="#{bundle.CreateRouteRequiredMessage_routeName}"/>
+                        <p:outputLabel value="#{bundle.CreateRouteLabel_airportFrom}" for="airportFrom" />
+                        <p:inputText id="airportFrom" value="#{routeController.selected.airportFrom}" title="#{bundle.CreateRouteTitle_airportFrom}" required="true" requiredMessage="#{bundle.CreateRouteRequiredMessage_airportFrom}"/>
+                        <p:outputLabel value="#{bundle.CreateRouteLabel_airportTo}" for="airportTo" />
+                        <p:inputText id="airportTo" value="#{routeController.selected.airportTo}" title="#{bundle.CreateRouteTitle_airportTo}" required="true" requiredMessage="#{bundle.CreateRouteRequiredMessage_airportTo}"/>
+                        <p:outputLabel value="#{bundle.CreateRouteLabel_adultFare}" for="adultFare" />
+                        <p:inputText id="adultFare" value="#{routeController.selected.adultFare}" title="#{bundle.CreateRouteTitle_adultFare}" required="true" requiredMessage="#{bundle.CreateRouteRequiredMessage_adultFare}"/>
+                        <p:outputLabel value="#{bundle.CreateRouteLabel_childFare}" for="childFare" />
+                        <p:inputText id="childFare" value="#{routeController.selected.childFare}" title="#{bundle.CreateRouteTitle_childFare}" required="true" requiredMessage="#{bundle.CreateRouteRequiredMessage_childFare}"/>
+                        <p:outputLabel value="#{bundle.CreateRouteLabel_infantFare}" for="infantFare" />
+                        <p:inputText id="infantFare" value="#{routeController.selected.infantFare}" title="#{bundle.CreateRouteTitle_infantFare}" required="true" requiredMessage="#{bundle.CreateRouteRequiredMessage_infantFare}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{routeController.create}" value="#{bundle.Save}" update="display,:RouteListForm:datalist,:growl" oncomplete="handleSubmit(args,'RouteCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="RouteCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="FlightCreateDlg" widgetVar="FlightCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateFlightTitle}">
+            <h:form id="FlightCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{flightController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateFlightLabel_flightId}" for="flightId" />
+                        <p:inputText id="flightId" value="#{flightController.selected.flightId}" title="#{bundle.CreateFlightTitle_flightId}" required="true" requiredMessage="#{bundle.CreateFlightRequiredMessage_flightId}"/>
+                        <p:outputLabel value="#{bundle.CreateFlightLabel_flightDate}" for="flightDate" />
+                        <p:calendar id="flightDate" pattern="MM/dd/yyyy" value="#{flightController.selected.flightDate}" title="#{bundle.EditFlightTitle_flightDate}" required="true" requiredMessage="#{bundle.EditFlightRequiredMessage_flightDate}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateFlightLabel_passengerCount}" for="passengerCount" />
+                        <p:inputText id="passengerCount" value="#{flightController.selected.passengerCount}" title="#{bundle.CreateFlightTitle_passengerCount}" required="true" requiredMessage="#{bundle.CreateFlightRequiredMessage_passengerCount}"/>
+                        <p:outputLabel value="#{bundle.CreateFlightLabel_leaveDateTime}" for="leaveDateTime" />
+                        <p:calendar id="leaveDateTime" pattern="MM/dd/yyyy HH:mm:ss" value="#{flightController.selected.leaveDateTime}" title="#{bundle.EditFlightTitle_leaveDateTime}" required="true" requiredMessage="#{bundle.EditFlightRequiredMessage_leaveDateTime}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateFlightLabel_arrivalDateTime}" for="arrivalDateTime" />
+                        <p:calendar id="arrivalDateTime" pattern="MM/dd/yyyy HH:mm:ss" value="#{flightController.selected.arrivalDateTime}" title="#{bundle.EditFlightTitle_arrivalDateTime}" required="true" requiredMessage="#{bundle.EditFlightRequiredMessage_arrivalDateTime}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateFlightLabel_routeId}" for="routeId" />
+                        <p:selectOneMenu id="routeId" value="#{flightController.selected.routeId}" required="true" requiredMessage="#{bundle.EditFlightRequiredMessage_routeId}">
+                            <f:selectItems value="#{routeController.itemsAvailableSelectOne}"
+                                           var="routeIdItem"
+                                           itemValue="#{routeIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{flightController.create}" value="#{bundle.Save}" update="display,:FlightListForm:datalist,:growl" oncomplete="handleSubmit(args,'FlightCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="FlightCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

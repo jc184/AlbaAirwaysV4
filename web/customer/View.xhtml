@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CustomerViewDlg" widgetVar="CustomerViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCustomerTitle}">
+            <h:form id="CustomerViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{customerController.selected != null}">
+                        <h:outputText value="#{bundle.ViewCustomerLabel_customerId}"/>
+                        <h:outputText value="#{customerController.selected.customerId}" title="#{bundle.ViewCustomerTitle_customerId}"/>
+                        <h:outputText value="#{bundle.ViewCustomerLabel_firstName}"/>
+                        <h:outputText value="#{customerController.selected.firstName}" title="#{bundle.ViewCustomerTitle_firstName}"/>
+                        <h:outputText value="#{bundle.ViewCustomerLabel_surname}"/>
+                        <h:outputText value="#{customerController.selected.surname}" title="#{bundle.ViewCustomerTitle_surname}"/>
+                        <h:outputText value="#{bundle.ViewCustomerLabel_contactNo}"/>
+                        <h:outputText value="#{customerController.selected.contactNo}" title="#{bundle.ViewCustomerTitle_contactNo}"/>
+                        <h:outputText value="#{bundle.ViewCustomerLabel_emailAddress}"/>
+                        <h:outputText value="#{customerController.selected.emailAddress}" title="#{bundle.ViewCustomerTitle_emailAddress}"/>
+                        <h:outputText value="#{bundle.ViewCustomerLabel_loginName}"/>
+                        <h:outputText value="#{customerController.selected.loginName}" title="#{bundle.ViewCustomerTitle_loginName}"/>
+                        <h:outputText value="#{bundle.ViewCustomerLabel_loginPassword}"/>
+                        <h:outputText value="#{customerController.selected.loginPassword}" title="#{bundle.ViewCustomerTitle_loginPassword}"/>
+                        <h:outputText value="#{bundle.ViewCustomerLabel_dateOfBirth}"/>
+                        <h:outputText value="#{customerController.selected.dateOfBirth}" title="#{bundle.ViewCustomerTitle_dateOfBirth}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="CustomerViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
